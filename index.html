@@ -4,18 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Luke Shortener | Free URL Shortener</title>
-
+    <title>Luke Shortener</title>
     <meta name="description"
         content="Shorten long URLs instantly with Luke Shortener. Fast, free, secure, and easy-to-use URL shortener.">
     <meta name="keywords" content="url shortener, link shortener, shorten url, short links, free url shortener">
     <meta name="author" content="Luke">
-
     <meta name="theme-color" content="#7c3aed">
-
     <meta name="robots" content="index, follow">
-
     <link rel="icon" type="image/svg+xml" href="./static/imgs/favicon.svg">
 
     <!-- Open Graph -->
@@ -37,7 +32,7 @@
         body {
             background:
                 radial-gradient(circle at top,
-                    rgba(139, 92, 246, .35),
+                    rgba(174, 0, 255, 0.35),
                     transparent 40%),
                 #09090b;
         }
@@ -52,9 +47,7 @@
             Luk3 Shortener
         </h1>
 
-        <p class="text-zinc-400 text-center mb-8">
-            Encurte seus links em segundos.
-        </p>
+        <p class="text-zinc-400 text-center mb-8">Encurte seus links em segundos.</p>
 
         <form id="shorten-form" class="space-y-4">
 
@@ -82,38 +75,7 @@
 
     </div>
 
-    <script>
-        const input = document.getElementById('url');
-        const button = document.getElementById('shorten');
-        const form = document.getElementById('shorten-form');
-
-        // Habilita/desabilita o botão
-        input.addEventListener('input', () => {
-            button.disabled = input.value.trim() === '';
-        });
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const url = input.value.trim();
-
-            const response = await fetch('/api/shorten', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ url })
-            });
-
-            const data = await response.json();
-
-            document.getElementById('result').classList.remove('hidden');
-
-            const shortUrl = document.getElementById('short-url');
-            shortUrl.textContent = data.short;
-            shortUrl.href = data.short;
-        });
-    </script>
+    <script src="./static/js/script.js"></script>
 
 </body>
 
