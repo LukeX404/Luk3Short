@@ -97,4 +97,4 @@ Ao acessar esse link, você será redirecionado automaticamente para a URL origi
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT.
+Este projeto está licenciado sob a licença [MIT](LICENSE).
