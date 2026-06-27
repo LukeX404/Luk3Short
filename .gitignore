@@ -1,0 +1,36 @@
+    ```gitignore
+# SQLite database
+database.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Go temporary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Build and cache
+bin/
+dist/
+coverage.out
+
+# IDEs
+.vscode/
+.idea/
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+```

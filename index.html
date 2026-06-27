@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Luke Shortener | Free URL Shortener</title>
+
+    <meta name="description"
+        content="Shorten long URLs instantly with Luke Shortener. Fast, free, secure, and easy-to-use URL shortener.">
+    <meta name="keywords" content="url shortener, link shortener, shorten url, short links, free url shortener">
+    <meta name="author" content="Luke">
+
+    <meta name="theme-color" content="#7c3aed">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/svg+xml" href="./static/imgs/favicon.svg">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Luke Shortener">
+    <meta property="og:description" content="Shorten long URLs instantly with Luke Shortener.">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="/static/imgs/og-image.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Luke Shortener">
+    <meta name="twitter:description" content="Shorten long URLs instantly with Luke Shortener.">
+    <meta name="twitter:image" content="/static/imgs/og-image.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top,
+                    rgba(139, 92, 246, .35),
+                    transparent 40%),
+                #09090b;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-xl rounded-3xl border border-purple-500/20 bg-white/5 backdrop-blur-xl p-8 shadow-2xl">
+
+        <h1 class="text-4xl font-bold text-white text-center mb-2">
+            Luk3 Shortener
+        </h1>
+
+        <p class="text-zinc-400 text-center mb-8">
+            Encurte seus links em segundos.
+        </p>
+
+        <form id="shorten-form" class="space-y-4">
+
+            <input id="url" type="url" required placeholder="https://youtube.com/"
+                class="w-full rounded-2xl bg-zinc-900/70 border border-zinc-700 px-5 py-4 text-white outline-none focus:border-purple-500">
+
+            <button id="shorten" type="submit" disabled
+                class="w-full rounded-2xl bg-purple-600 hover:bg-purple-500 disabled:bg-zinc-700 disabled:text-zinc-400 disabled:cursor-not-allowed transition py-4 font-semibold text-white">
+                Encurtar URL
+            </button>
+
+            <div id="result" class="hidden rounded-2xl border border-zinc-700 bg-zinc-900/50 p-4 text-center">
+
+                <p class="text-zinc-400 text-sm mb-2">
+                    Seu link:
+                </p>
+
+                <a id="short-url" href="#" target="_blank"
+                    class="text-purple-400 hover:text-purple-300 font-medium break-all">
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        const input = document.getElementById('url');
+        const button = document.getElementById('shorten');
+        const form = document.getElementById('shorten-form');
+
+        // Habilita/desabilita o botão
+        input.addEventListener('input', () => {
+            button.disabled = input.value.trim() === '';
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const url = input.value.trim();
+
+            const response = await fetch('/api/shorten', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url })
+            });
+
+            const data = await response.json();
+
+            document.getElementById('result').classList.remove('hidden');
+
+            const shortUrl = document.getElementById('short-url');
+            shortUrl.textContent = data.short;
+            shortUrl.href = data.short;
+        });
+    </script>
+
+</body>
+
+</html>
